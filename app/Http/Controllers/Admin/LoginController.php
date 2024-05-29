@@ -15,14 +15,14 @@ class LoginController extends Controller
     public function login(Request $request) {
         $result = Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], true); // return true or false
         if ($result) {
-            return redirect()->route('ad.category.index');
+            return redirect()->route('ad.dashboard');
         } else {
             return redirect()->route('ad.login-page')->with('error', 'Email/Password not correct!');
         }
     }
 
     public function logout() {
-        Auth::logout();
+        Auth::guard('admin')->logout();
         return redirect()->route('ad.login-page');
     }
 }

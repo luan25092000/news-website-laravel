@@ -31,6 +31,18 @@
         <div class="row justify-content-center">
 
             <div class="col-xl-6 col-lg-6 col-md-6">
+                @if(Session::has('success'))
+                    <div class="alert alert-success alert-dismissible mt-4">
+                        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{Session::get('success')}}
+                    </div>
+                @endif
+                @if(Session::has('error'))
+                    <div class="alert alert-danger alert-dismissible mt-4">
+                        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{Session::get('error')}}
+                    </div>
+                @endif
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
@@ -53,7 +65,7 @@
                                             <input type="password" name="password" class="form-control form-control-user"
                                                 id="password" placeholder="Password">
                                         </div>
-                                        <button type="button" id="loginBtn" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" id="loginBtn" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
                                     </form>

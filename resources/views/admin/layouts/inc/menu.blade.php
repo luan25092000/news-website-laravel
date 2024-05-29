@@ -3,7 +3,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('ad.dashboard') }}">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -14,8 +14,8 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="">
+        <li class="nav-item {{ Route::is('ad.dashboard') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('ad.dashboard') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -29,15 +29,15 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <li class="nav-item {{ Route::is('ad.category.index') || Route::is('ad.category.create') || Route::is('ad.category.edit') ? 'active' : '' }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Categories</span>
             </a>
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">List</a>
-                    <a class="collapse-item" href="">Create</a>
+                    <a class="collapse-item" href="{{ route('ad.category.index') }}">List</a>
+                    <a class="collapse-item" href="{{ route('ad.category.create') }}">Create</a>
                 </div>
             </div>
         </li>
