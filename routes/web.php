@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\NewsController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -41,6 +42,16 @@ Route::group(['prefix' => 'ad', 'as' => 'ad.', 'namespace' => 'Admin'], function
             Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('edit');
             Route::post('edit/{id}', [CategoryController::class, 'update'])->name('update');
             Route::get('delete/{id}', [CategoryController::class, 'destroy'])->name('delete');
+        });
+        // News
+        Route::group(['prefix' => 'news', 'as' => 'news.'], function() {
+            Route::get('/', [NewsController::class, 'index'])->name('index');
+            Route::get('add', [NewsController::class, 'create'])->name('create');
+            Route::post('add', [NewsController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [NewsController::class, 'edit'])->name('edit');
+            Route::post('edit/{id}', [NewsController::class, 'update'])->name('update');
+            Route::get('delete/{id}', [NewsController::class, 'destroy'])->name('delete');
+            Route::get('show/{id}', [NewsController::class, 'show'])->name('show');
         });
     });
 });
