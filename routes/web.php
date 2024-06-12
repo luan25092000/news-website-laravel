@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -52,6 +54,20 @@ Route::group(['prefix' => 'ad', 'as' => 'ad.', 'namespace' => 'Admin'], function
             Route::post('edit/{id}', [NewsController::class, 'update'])->name('update');
             Route::get('delete/{id}', [NewsController::class, 'destroy'])->name('delete');
             Route::get('show/{id}', [NewsController::class, 'show'])->name('show');
+        });
+        // Staff
+        Route::group(['prefix' => 'staff', 'as' => 'staff.'], function() {
+            Route::get('/', [StaffController::class, 'index'])->name('index');
+            Route::get('add', [StaffController::class, 'create'])->name('create');
+            Route::post('add', [StaffController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [StaffController::class, 'edit'])->name('edit');
+            Route::post('edit/{id}', [StaffController::class, 'update'])->name('update');
+            Route::get('update-status/{id}/{status}', [StaffController::class, 'updateStatus'])->name('update-status');
+        });
+        // User
+        Route::group(['prefix' => 'user', 'as' => 'user.'], function() {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::get('update-status/{id}/{status}', [UserController::class, 'updateStatus'])->name('update-status');
         });
     });
 });

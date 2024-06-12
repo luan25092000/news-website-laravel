@@ -65,28 +65,28 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <li class="nav-item {{ Route::is('ad.staff.index') || Route::is('ad.staff.create') || Route::is('ad.staff.edit') ? 'active' : '' }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Staff</span>
             </a>
             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">List</a>
-                    <a class="collapse-item" href="">Create</a>
+                    <a class="collapse-item" href="{{ route('ad.staff.index') }}">List</a>
+                    <a class="collapse-item" href="{{ route('ad.staff.create') }}">Create</a>
                 </div>
             </div>
         </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <li class="nav-item {{ Route::is('ad.user.index') ? 'active' : '' }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                 <i class="fas fa-fw fa-table"></i>
                 <span>User</span>
             </a>
             <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">List</a>
+                    <a class="collapse-item" href="{{ route('ad.user.index') }}">List</a>
                 </div>
             </div>
         </li>

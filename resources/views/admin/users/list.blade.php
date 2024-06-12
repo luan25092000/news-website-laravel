@@ -1,11 +1,11 @@
 @extends('admin.layouts.index')
 
-@section('title', 'Staff')
+@section('title', 'User')
 
 @section('content')
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Staff List</h1>
+<h1 class="h3 mb-2 text-gray-800">User List</h1>
 @if(Session::has('success'))
     <div class="alert alert-success alert-dismissible mt-4">
         <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -42,22 +42,19 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($staffs as $index => $staff)
+                    @foreach ($users as $index => $user)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $staff->name }}</td>
-                            <td>{{ $staff->email }}</td>
-                            <td>{!! $staff->active == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>' !!}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{!! $user->active == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>' !!}</td>
                             <td>
-                                <a href="{{ route('ad.staff.edit', ['id' => $staff->id]) }}" class="btn btn-primary btn-sm btn-circle">
-                                    <i class="fas fa-pen"></i>
-                                </a>
-                                @if ($staff->active == 1)
-                                    <a href="{{ route('ad.staff.update-status', ['id' => $staff->id, 'status' => 0]) }}" class="btn btn-danger btn-sm btn-circle" onclick="return confirm('Do you want to lock this staff ?')">
+                                @if ($user->active == 1)
+                                    <a href="{{ route('ad.staff.update-status', ['id' => $user->id, 'status' => 0]) }}" class="btn btn-danger btn-sm btn-circle" onclick="return confirm('Do you want to lock this user ?')">
                                         <i class="fas fa-lock"></i>
                                     </a>
                                 @else
-                                    <a href="{{ route('ad.staff.update-status', ['id' => $staff->id, 'status' => 1]) }}" class="btn btn-success btn-sm btn-circle" onclick="return confirm('Do you want to unlock this staff ?')">
+                                    <a href="{{ route('ad.staff.update-status', ['id' => $user->id, 'status' => 1]) }}" class="btn btn-success btn-sm btn-circle" onclick="return confirm('Do you want to unlock this user ?')">
                                         <i class="fas fa-unlock"></i>
                                     </a>
                                 @endif
