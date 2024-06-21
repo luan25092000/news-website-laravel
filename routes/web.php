@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Client\HomeController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -21,6 +22,10 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::group(['as' => 'client.', 'namespace' => 'Client'], function() {
+    Route::get('/', [HomeController::class, 'index'])->name('index');
+});
 
 // Admin
 Route::group(['prefix' => 'ad', 'as' => 'ad.', 'namespace' => 'Admin'], function() {
