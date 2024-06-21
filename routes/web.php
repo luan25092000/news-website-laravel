@@ -26,7 +26,11 @@ use Illuminate\Support\Facades\Auth;
 Route::group(['prefix' => 'ad', 'as' => 'ad.', 'namespace' => 'Admin'], function() {
     Route::get('/', function() {
         if (Auth::guard('admin')->check()) { // check admin login
-            return redirect()->route('ad.dashboard');
+            if (Auth::guard('admin')->user()->role == 0) {
+                return redirect()->route('ad.dashboard');
+            } else {
+                return redirect()->route('ad.news.index');
+            }
         } else {
             return redirect()->route('ad.login-page');
         }
@@ -37,9 +41,9 @@ Route::group(['prefix' => 'ad', 'as' => 'ad.', 'namespace' => 'Admin'], function
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
     Route::group(['middleware' => 'check.admin.login'], function() {
         // Dashboard
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('check.role.admin');
         // Category
-        Route::group(['prefix' => 'category', 'as' => 'category.'], function() {
+        Route::group(['prefix' => 'category', 'as' => 'category.', 'middleware' => 'check.role.admin'], function() {
             Route::get('/', [CategoryController::class, 'index'])->name('index');
             Route::get('add', [CategoryController::class, 'create'])->name('create');
             Route::post('add', [CategoryController::class, 'store'])->name('store');
@@ -58,7 +62,7 @@ Route::group(['prefix' => 'ad', 'as' => 'ad.', 'namespace' => 'Admin'], function
             Route::get('show/{id}', [NewsController::class, 'show'])->name('show');
         });
         // Staff
-        Route::group(['prefix' => 'staff', 'as' => 'staff.'], function() {
+        Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => 'check.role.admin'], function() {
             Route::get('/', [StaffController::class, 'index'])->name('index');
             Route::get('add', [StaffController::class, 'create'])->name('create');
             Route::post('add', [StaffController::class, 'store'])->name('store');
@@ -67,7 +71,7 @@ Route::group(['prefix' => 'ad', 'as' => 'ad.', 'namespace' => 'Admin'], function
             Route::get('update-status/{id}/{status}', [StaffController::class, 'updateStatus'])->name('update-status');
         });
         // User
-        Route::group(['prefix' => 'user', 'as' => 'user.'], function() {
+        Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'check.role.admin'], function() {
             Route::get('/', [UserController::class, 'index'])->name('index');
             Route::get('update-status/{id}/{status}', [UserController::class, 'updateStatus'])->name('update-status');
         });
@@ -77,7 +81,7 @@ Route::group(['prefix' => 'ad', 'as' => 'ad.', 'namespace' => 'Admin'], function
             Route::get('delete/{id}', [CommentController::class, 'destroy'])->name('delete');
         });
         // Setting
-        Route::group(['prefix' => 'setting', 'as' => 'setting.'], function() {
+        Route::group(['prefix' => 'setting', 'as' => 'setting.', 'middleware' => 'check.role.admin'], function() {
             Route::get('add', [SettingController::class, 'create'])->name('create');
             Route::post('add', [SettingController::class, 'store'])->name('store');
         });
