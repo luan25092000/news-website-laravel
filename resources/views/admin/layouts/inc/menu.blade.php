@@ -98,15 +98,15 @@
         </div>
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="">
+        <li class="nav-item {{ Route::is('ad.comment.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('ad.comment.index') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Comments</span></a>
         </li>
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="">
+        <li class="nav-item {{ Route::is('ad.setting.create') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('ad.setting.create') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Setting</span></a>
         </li>
@@ -141,15 +141,15 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <li class="nav-item {{ Route::is('ad.news.index') || Route::is('ad.news.create') || Route::is('ad.news.edit') ? 'active' : '' }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                 <i class="fas fa-fw fa-table"></i>
                 <span>News</span>
             </a>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">List</a>
-                    <a class="collapse-item" href="">Create</a>
+                    <a class="collapse-item" href="{{ route('ad.news.index') }}">List</a>
+                    <a class="collapse-item" href="{{ route('ad.news.create') }}">Create</a>
                 </div>
             </div>
         </li>
@@ -161,8 +161,8 @@
         </div>
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="">
+        <li class="nav-item {{ Route::is('ad.comment.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('ad.comment.index') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Comments</span></a>
         </li>

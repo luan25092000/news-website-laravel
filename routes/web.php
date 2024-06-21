@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -68,6 +70,16 @@ Route::group(['prefix' => 'ad', 'as' => 'ad.', 'namespace' => 'Admin'], function
         Route::group(['prefix' => 'user', 'as' => 'user.'], function() {
             Route::get('/', [UserController::class, 'index'])->name('index');
             Route::get('update-status/{id}/{status}', [UserController::class, 'updateStatus'])->name('update-status');
+        });
+        // Comment
+        Route::group(['prefix' => 'comment', 'as' => 'comment.'], function() {
+            Route::get('/', [CommentController::class, 'index'])->name('index');
+            Route::get('delete/{id}', [CommentController::class, 'destroy'])->name('delete');
+        });
+        // Setting
+        Route::group(['prefix' => 'setting', 'as' => 'setting.'], function() {
+            Route::get('add', [SettingController::class, 'create'])->name('create');
+            Route::post('add', [SettingController::class, 'store'])->name('store');
         });
     });
 });
