@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\NewsController as News;
+use App\Http\Controllers\Client\AuthController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -25,6 +27,12 @@ use Illuminate\Support\Facades\Auth;
 
 Route::group(['as' => 'client.', 'namespace' => 'Client'], function() {
     Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('news-detail/{id}', [News::class, 'showNewsDetail'])->name('news.detail');
+    Route::get('news-category/{categoryId}', [News::class, 'showNewsByCategory'])->name('news.category');
+    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login.form');
+    Route::post('login', [AuthController::class, 'handleLogin'])->name('handle.login');
+    Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+    Route::post('register', [AuthController::class, 'handleRegister'])->name('handle.register');
 });
 
 // Admin

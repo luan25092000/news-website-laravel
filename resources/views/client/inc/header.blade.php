@@ -60,4 +60,12 @@
             <a class="nav-link" href="{{ route('client.index') }}">Home</a>
         </li>
     </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Sign In</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Sign Up</a>
+        </li>
+    </ul>
 </nav>
