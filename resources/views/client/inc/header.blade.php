@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-3 fh5co_padding_menu">
-                <a href="?url=home">
+                <a href="{{ route('client.index') }}">
                     <img src="{{ asset(\App\Models\Setting::first()->logo) }}" alt="img" class="fh5co_logo_width" />
                 </a>
             </div>
@@ -61,11 +61,22 @@
         </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Sign In</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Sign Up</a>
-        </li>
+        @if (Auth::check())
+            <li class="nav-item">
+                <div class="dropdown">
+                    <div class="dropdown-toggle" data-toggle="dropdown">Hi, {{ Auth::user()->name }}</div>
+                    <div class="dropdown-menu" style="margin-left: -90px;">
+                        <a class="dropdown-item" href="{{ route('client.logout') }}">Logout</a>
+                    </div>
+                </div>
+            </li>
+        @else
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('client.login.form') }}">Sign In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('client.register.form') }}">Sign Up</a>
+            </li>
+        @endif
     </ul>
 </nav>

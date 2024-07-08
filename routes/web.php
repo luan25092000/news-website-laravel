@@ -33,6 +33,7 @@ Route::group(['as' => 'client.', 'namespace' => 'Client'], function() {
     Route::post('login', [AuthController::class, 'handleLogin'])->name('handle.login');
     Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register.form');
     Route::post('register', [AuthController::class, 'handleRegister'])->name('handle.register');
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 // Admin
