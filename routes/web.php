@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\NewsController as News;
 use App\Http\Controllers\Client\AuthController;
+use App\Http\Controllers\Admin\ReplyController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -103,6 +104,11 @@ Route::group(['prefix' => 'ad', 'as' => 'ad.', 'namespace' => 'Admin'], function
         Route::group(['prefix' => 'setting', 'as' => 'setting.', 'middleware' => 'check.role.admin'], function() {
             Route::get('add', [SettingController::class, 'create'])->name('create');
             Route::post('add', [SettingController::class, 'store'])->name('store');
+        });
+        // Reply
+        Route::group(['prefix' => 'reply', 'as' => 'reply.'], function() {
+            Route::get('/{commentId}', [ReplyController::class, 'index'])->name('index');
+            Route::get('delete/{id}', [ReplyController::class, 'destroy'])->name('delete');
         });
     });
 });

@@ -4,20 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Comment;
+use App\Models\Reply;
 
-class CommentController extends Controller
+class ReplyController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($commentId)
     {
-        $comments = Comment::orderBy('created_at', 'DESC')->get();
+        $replies = Reply::where('comment_id', $commentId)->orderBy('created_at', 'DESC')->get();
 
-        return view('admin.comments.list', compact('comments'));
+        return view('admin.replies.list', compact('replies'));
     }
 
     /**
@@ -83,9 +83,9 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comment::find($id);
-        $comment->delete();
+        $reply = Reply::find($id);
+        $reply->delete();
 
-        return redirect()->back()->with('success', 'Delete comment successful');
+        return redirect()->back()->with('success', 'Delete reply successful');
     }
 }

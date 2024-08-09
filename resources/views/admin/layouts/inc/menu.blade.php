@@ -98,7 +98,7 @@
         </div>
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item {{ Route::is('ad.comment.index') ? 'active' : '' }}">
+        <li class="nav-item {{ Route::is('ad.comment.index') || Route::is('ad.reply.index') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('ad.comment.index') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Comments</span></a>

@@ -1,11 +1,11 @@
 @extends('admin.layouts.index')
 
-@section('title', 'Comment')
+@section('title', 'Reply')
 
 @section('content')
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Comment</h1>
+<h1 class="h3 mb-2 text-gray-800">Reply</h1>
 @if(Session::has('success'))
     <div class="alert alert-success alert-dismissible mt-4">
         <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -27,7 +27,6 @@
                     <tr>
                         <th>#</th>
                         <th>User</th>
-                        <th>News</th>
                         <th>Content</th>
                         <th>Actions</th>
                     </tr>
@@ -36,24 +35,19 @@
                     <tr>
                         <th>#</th>
                         <th>User</th>
-                        <th>News</th>
                         <th>Content</th>
                         <th>Actions</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($comments as $index => $comment)
+                    @foreach ($replies as $index => $reply)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $comment->getUser->name }}</td>
-                            <td>{{ $comment->getNews->title }}</td>
-                            <td>{{ $comment->content }}</td>
+                            <td>{{ $reply->getUser->name }}</td>
+                            <td>{{ $reply->content }}</td>
                             <td>
-                                <a href="{{ route('ad.comment.delete', ['id' => $comment->id]) }}" class="btn btn-danger btn-sm btn-circle" onclick="return confirm('Do you want to delete this comment ?')">
+                                <a href="{{ route('ad.reply.delete', ['id' => $reply->id]) }}" class="btn btn-danger btn-sm btn-circle" onclick="return confirm('Do you want to delete this reply ?')">
                                     <i class="fas fa-trash"></i>
-                                </a>
-                                <a href="{{ route('ad.reply.index', ['commentId' => $comment->id]) }}" class="btn btn-primary btn-sm btn-circle">
-                                    <i class="fas fa-eye"></i>
                                 </a>
                             </td>
                         </tr>
