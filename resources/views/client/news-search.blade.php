@@ -1,7 +1,7 @@
 @extends('client.layouts.template')
 
 @section('title')
-    {{ $category->name }}
+    Search by '{{ $request->keyword }}'
 @endsection
 
 @section('main')
@@ -10,9 +10,9 @@
         <div class="row mx-0">
             <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
                 <div>
-                    <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">{{ $category->name }}</div>
+                    <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Search by '{{ $request->keyword }}'</div>
                 </div>
-                @foreach ($newsCategories as $news)
+                @foreach ($newsSearch as $news)
                     <div class="row pb-4">
                         <div class="col-md-5">
                             <div class="fh5co_hover_news_img">
@@ -49,7 +49,7 @@
         </div>
         <div class="row mx-0">
             <div class="col-12 text-center pb-4 pt-4">
-                {{ $newsCategories->links() }}
+                {{ $newsSearch->links() }}
              </div>
         </div>
     </div>

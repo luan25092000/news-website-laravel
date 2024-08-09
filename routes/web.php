@@ -34,6 +34,11 @@ Route::group(['as' => 'client.', 'namespace' => 'Client'], function() {
     Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register.form');
     Route::post('register', [AuthController::class, 'handleRegister'])->name('handle.register');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('search-news', [News::class, 'searchNews'])->name('news.search');
+    Route::post('create-comment/{newsId}', [News::class, 'createComment'])->name('create.comment');
+    Route::post('create-reply', [News::class, 'createReply'])->name('create.reply');
+    Route::get('delete-comment/{commentId}', [News::class, 'deleteComment'])->name('delete.comment');
+    Route::get('delete-reply/{replyId}', [News::class, 'deleteReply'])->name('delete.reply');
 });
 
 // Admin

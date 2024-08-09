@@ -5,17 +5,19 @@
 @section('main')
     <div class="container-fluid paddding mb-5">
         <div class="row mx-0">
-            <div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
-                <div class="fh5co_suceefh5co_height"><img src="{{ $latestNews->image }}" alt="{{ $latestNews->title }}" />
-                    <div class="fh5co_suceefh5co_height_position_absolute"></div>
-                    <div class="fh5co_suceefh5co_height_position_absolute_font">
-                        <div class=""><a class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;
-                                {{ \Carbon\Carbon::parse($latestNews->created_at)->format('M d, Y') }} </a></div>
-                        <div class=""><a href="{{ route('client.news.detail', [$latestNews->id]) }}"
-                                class="fh5co_good_font"> {{ $latestNews->title }} </a></div>
+            @if ($latestNews)
+                <div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
+                    <div class="fh5co_suceefh5co_height"><img src="{{ $latestNews->image }}" alt="{{ $latestNews->title }}" />
+                        <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                        <div class="fh5co_suceefh5co_height_position_absolute_font">
+                            <div class=""><a class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;
+                                    {{ \Carbon\Carbon::parse($latestNews->created_at)->format('M d, Y') }} </a></div>
+                            <div class=""><a href="{{ route('client.news.detail', [$latestNews->id]) }}"
+                                    class="fh5co_good_font"> {{ $latestNews->title }} </a></div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
             <div class="col-md-6">
                 <div class="row">
                     @foreach ($newsAfterLatest as $news)
