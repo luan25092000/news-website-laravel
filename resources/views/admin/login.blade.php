@@ -24,7 +24,7 @@
 </head>
 
 <body class="bg-gradient-primary">
-
+    @include('sweetalert::alert')
     <div class="container">
 
         <!-- Outer Row -->

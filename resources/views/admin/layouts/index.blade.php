@@ -14,7 +14,7 @@
 </head>
 
 <body id="page-top">
-
+    @include('sweetalert::alert')
     <!-- Page Wrapper -->
     <div id="wrapper">
 
