@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendNewsNotification;
+use Illuminate\Support\Facades\Log;
 
 class NewsController extends Controller
 {
@@ -47,13 +51,14 @@ class NewsController extends Controller
             $imgName = $request->image->getClientOriginalName();
             // Store image
             $request->image->storeAs('/public/images/news', $imgName);
-            News::create([
+            $news = News::create([
                 'title' => $request->title,
                 'category_id' => $request->category_id,
                 'content' => $request->content,
                 'image' => '/storage/images/news/' . $imgName,
                 'admin_id' => Auth::guard('admin')->user()->id
             ]);
+            $this->sendNewsNotification($news->toArray());
 
             return redirect()->route('ad.news.index')->with('success', 'Add news successful');
         }
@@ -125,5 +130,14 @@ class NewsController extends Controller
         $news->delete();
 
         return redirect()->route('ad.news.index')->with('success', 'Delete news successful');
+    }
+
+    public function sendNewsNotification($news)
+    {
+        $users = User::pluck('email')->toArray();
+        Log::info('Email users: ' . json_encode($users));
+        Log::info('News: ' . json_encode($news));
+        Log::info('Image url: ' . public_path($news['image']));
+        Mail::to($users)->send(new SendNewsNotification($news));
     }
 }
